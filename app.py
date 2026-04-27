@@ -41,6 +41,7 @@ st.markdown("""
 # load and cache the data
 @st.cache_data
 def load_data():
+    url = "https://api.worldbank.org/v2/en/indicator/AG.YLD.CREL.KG?downloadformat=csv"
     data = pd.read_csv("cereal_yield.csv", skiprows=4)
     data = data.dropna(axis=1, how='all')
 
@@ -79,7 +80,7 @@ selected_year = st.sidebar.slider(
     "Select a Year",
     min_value=min_year,
     max_value=max_year,
-    value=2019
+    value=2020
 )
 
 countries_list = sorted(df['Country Name'].unique())
@@ -87,13 +88,13 @@ countries_list = sorted(df['Country Name'].unique())
 selected_countries = st.sidebar.multiselect(
     "Select Countries to Compare",
     options=countries_list,
-    default=[]
+    default=["United Kingdom", "India", "United States", "China", "Brazil"]
 )
 
 top_n = st.sidebar.selectbox(
     "Number of Top/Bottom Countries",
     options=[5, 10, 15, 20],
-    index=0
+    index=1
 )
 
 st.sidebar.markdown("---")
@@ -106,7 +107,7 @@ st.markdown("""
     <h1 style="color:#ffffff; margin:0; font-size:28px;">Global Cereal Crop Yield Dashboard</h1>
     <p style="color:#c8e6c9; margin:6px 0 0 0; font-size:15px;">
         Exploring cereal crop yield trends across 266 countries from 1961 to 2024 — 
-        providing insights into global food production and agricultural sustainability.
+        providing insights into global agricultural sustainability.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -160,7 +161,8 @@ st.markdown("Compare how cereal yield has changed over the years for selected co
 if len(selected_countries) == 0:
     st.warning("Please select at least one country from the sidebar to see the trend.")
 else:
-    df_line = df[df['Country Name'].isin(selected_countries)]
+    df_line = df[df['Country Name'].isin(selected_countries)].copy()
+    df_line = df_line.groupby(['Country Name', 'Year'], as_index=False)['Yield'].mean()
     fig_line = px.line(
         df_line,
         x='Year',
