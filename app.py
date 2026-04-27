@@ -93,7 +93,7 @@ selected_countries = st.sidebar.multiselect(
 top_n = st.sidebar.selectbox(
     "Number of Top/Bottom Countries",
     options=[5, 10, 15, 20],
-    index=1
+    index=0
 )
 
 st.sidebar.markdown("---")
