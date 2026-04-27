@@ -79,7 +79,7 @@ selected_year = st.sidebar.slider(
     "Select a Year",
     min_value=min_year,
     max_value=max_year,
-    value=2020
+    value=2019
 )
 
 countries_list = sorted(df['Country Name'].unique())
