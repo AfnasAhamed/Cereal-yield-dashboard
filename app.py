@@ -12,7 +12,7 @@ st.set_page_config(
 st.markdown("""
     <style>
     .main {background-color: #f9f9f9;}
-    .block-container {padding-top: 1rem; padding-bottom: 1rem;}
+    .block-container {padding-top: 1.2rem; padding-bottom: 1.2rem;}
     div[data-testid="stMetric"] {
         background-color: #ffffff;
         border: 1px solid #e0e0e0;
