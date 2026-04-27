@@ -87,7 +87,7 @@ countries_list = sorted(df['Country Name'].unique())
 selected_countries = st.sidebar.multiselect(
     "Select Countries to Compare",
     options=countries_list,
-    default=["United Kingdom", "India", "United States", "China", "Brazil", "Sri Lanka"]
+    default=[]
 )
 
 top_n = st.sidebar.selectbox(
