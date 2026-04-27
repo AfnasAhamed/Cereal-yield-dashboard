@@ -106,7 +106,7 @@ st.markdown("""
     <h1 style="color:#ffffff; margin:0; font-size:28px;">Global Cereal Crop Yield Dashboard</h1>
     <p style="color:#c8e6c9; margin:6px 0 0 0; font-size:15px;">
         Exploring cereal crop yield trends across 266 countries from 1961 to 2024 — 
-        providing insights into global agricultural sustainability.
+        providing insights into global food production and agricultural sustainability.
     </p>
 </div>
 """, unsafe_allow_html=True)
