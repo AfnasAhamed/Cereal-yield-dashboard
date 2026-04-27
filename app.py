@@ -162,14 +162,15 @@ if len(selected_countries) == 0:
     st.warning("Please select at least one country from the sidebar to see the trend.")
 else:
     df_line = df[df['Country Name'].isin(selected_countries)].copy()
-    df_line = df_line.groupby(['Country Name', 'Year'], as_index=False)['Yield'].mean()
+    df_line = df_line.sort_values(['Country Name', 'Year'])
+    df_line = df_line.rename(columns={'Country Name': 'Country'})
     fig_line = px.line(
         df_line,
         x='Year',
         y='Yield',
-        color='Country Name',
+        color='Country',
         markers=True,
-        labels={'Yield': 'kg per hectare', 'Country Name': 'Country'},
+        labels={'Yield': 'kg per hectare'},
         title='Cereal Yield Trend by Selected Countries'
     )
     fig_line.update_layout(
@@ -179,7 +180,7 @@ else:
         title_font=dict(color='#333333', size=15),
         xaxis=axis_style,
         yaxis=axis_style,
-        legend=dict(font=dict(color='#333333'), bgcolor='#f9f9f9')
+        legend=dict(font=dict(color='#333333'), bgcolor='#f9f9f9', title_text='Country')
     )
     st.plotly_chart(fig_line, use_container_width=True)
 
